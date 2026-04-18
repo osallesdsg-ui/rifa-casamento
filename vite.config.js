@@ -3,13 +3,12 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/rifa-casamento/', // ✅ ADICIONE ESTA LINHA
-  server: {
-    port: 3000,
-    open: true,
-  },
+  base: './', // ✅ Caminho relativo para funcionar em qualquer domínio
   build: {
     outDir: 'dist',
-    sourcemap: false,
+    assetsDir: 'assets',
+  },
+  server: {
+    port: 3000,
   },
 })

@@ -9,9 +9,3 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>
 );
-
-<BrowserRouter basename="/rifa-casamento">
-  <AppProvider>
-    <App />
-  </AppProvider>
-</BrowserRouter>
