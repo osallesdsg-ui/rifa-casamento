@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  background-color: #0a0a0f;
+  color: #e8e0d5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* === TYPOGRAPHY === */
+.font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* === GRADIENTS === */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #c9a84c, #e8c96d, #c9a84c);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #c9a84c, #e8c96d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === GLASS CARDS === */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+}
+
+.glass-card-strong {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+/* === TICKET STYLES === */
+.ticket-available {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ticket-available:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  background: rgba(201, 168, 76, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+}
+
+.ticket-selected {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.15), rgba(232, 201, 109, 0.1));
+  border: 1px solid rgba(201, 168, 76, 0.6);
+  color: #e8c96d;
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket-selected::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, transparent 30%, rgba(232, 201, 109, 0.1) 50%, transparent 70%);
+  animation: shimmer-ticket 2s infinite;
+}
+
+@keyframes shimmer-ticket {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.ticket-pending {
+  background: rgba(255, 165, 0, 0.05);
+  border: 1px solid rgba(255, 165, 0, 0.15);
+  color: rgba(255, 165, 0, 0.3);
+  cursor: not-allowed;
+}
+
+.ticket-paid {
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  color: rgba(201, 168, 76, 0.6);
+  cursor: default;
+}
+
+/* === BUTTONS === */
+.btn-gold {
+  background: linear-gradient(135deg, #c9a84c, #d4b85a);
+  color: #0a0a0f;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 14px 28px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
+}
+
+.btn-gold:hover {
+  box-shadow: 0 4px 30px rgba(201, 168, 76, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: #c9a84c;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 14px 28px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+/* === INPUTS === */
+.input-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #e8e0d5;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.input-dark::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.input-dark:focus {
+  outline: none;
+  border-color: rgba(201, 168, 76, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+}
+
+/* === PROGRESS BAR === */
+.progress-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 100px;
+  height: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #c9a84c, #e8c96d);
+  height: 100%;
+  border-radius: 100px;
+  transition: width 1.5s ease-out;
+}
+
+/* === SCROLLBAR === */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* === FILTER PILLS === */
+.pill-active {
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: #c9a84c;
+}
+
+.pill-inactive {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.pill-inactive:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* === SAFE AREA FOR MOBILE === */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-area-pb {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
