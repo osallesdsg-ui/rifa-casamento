@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
 const AppContext = createContext();
 
@@ -10,25 +10,43 @@ export const useAppContext = () => {
   return context;
 };
 
-export const AppProvider = ({ children }) => {
+export function AppProvider({ children }) {
   const [selectedTickets, setSelectedTickets] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const selectTicket = useCallback((number) => {
-    setSelectedTickets(prev => {
-      if (prev.includes(number)) {
-        return prev.filter(n => n !== number);
+  // Carregar seleção do localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('selectedTickets');
+    if (saved) {
+      try {
+        setSelectedTickets(JSON.parse(saved));
+      } catch (e) {
+        console.error('Erro ao carregar cotas salvas:', e);
       }
-      return [...prev, number];
+    }
+  }, []);
+
+  // Salvar seleção no localStorage
+  useEffect(() => {
+    localStorage.setItem('selectedTickets', JSON.stringify(selectedTickets));
+  }, [selectedTickets]);
+
+  const selectTicket = useCallback((ticketNumber) => {
+    setSelectedTickets(prev => {
+      if (prev.includes(ticketNumber)) {
+        return prev.filter(n => n !== ticketNumber);
+      }
+      return [...prev, ticketNumber];
     });
   }, []);
 
   const clearSelection = useCallback(() => {
     setSelectedTickets([]);
+    localStorage.removeItem('selectedTickets');
   }, []);
 
   const login = useCallback((password) => {
-    if (password === '0912') {
+    if (password === '092') {
       setIsAuthenticated(true);
       return true;
     }
@@ -48,5 +66,11 @@ export const AppProvider = ({ children }) => {
     logout,
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-};
+  return (
+    <AppContext.Provider value={value}>
+      {children}
+    </AppContext.Provider>
+  );
+}
+
+export default AppContext;
