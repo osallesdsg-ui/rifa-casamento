@@ -46,7 +46,7 @@ export function AppProvider({ children }) {
   }, []);
 
   const login = useCallback((password) => {
-    if (password === '092') {
+    if (password === '0912') {
       setIsAuthenticated(true);
       return true;
     }
